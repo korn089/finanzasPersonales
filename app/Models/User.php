@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function movimientos(){
+        //un user puede tener muchos movimientos 1 a muchos poner en plural
+        return $this->hasMany(Movimiento::class);
+    }
+    public function presupuestos(){
+        //un user puede tener muchos movimientos
+        return $this->hasMany(Presupuesto::class);
+    }
 }
