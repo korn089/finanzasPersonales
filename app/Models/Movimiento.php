@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Movimiento extends Model
 {
     //deinimos los campos
-    protected $filllable=[
+    protected $fillable=[
         'user_id',
         'categoria_id',
         'tipo',
