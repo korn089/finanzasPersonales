@@ -25,4 +25,22 @@ class Movimiento extends Model
     public function categoria(){
         return $this->belongsTo(Categoria::class);
     }
+    //evento para actualizar el monto gastado cuando se crea un movimiento
+    protected static function booted(){
+        static::created(function($movimiento){
+            if($movimiento->tipo ==='gasto'){
+                //buscar el presupuesto correspondiente
+                $presupuesto= Presupuesto::where('user_id',$movimiento->user_id)
+                ->where('categoria_id', $movimiento->categoria_id)
+                ->where('mes', now()->format('F'))//usar el mes actual
+                ->where('anio', now()->year)
+                ->first();
+                //si existe el presupuesto actualice el monto gastado
+                if($presupuesto){
+                    $presupuesto->monto_gastado += $movimiento->monto;
+                    $presupuesto->save();
+                }
+            }
+        });
+    } 
 }

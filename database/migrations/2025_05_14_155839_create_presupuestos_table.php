@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('categoria_id')->constrained('categorias')->onDelete('cascade');
             $table->decimal('monto_asignado',10,2);
-            $table->decimal('monto_gastado',10,2);
+            $table->decimal('monto_gastado',10,2)->default(0);
             $table->string('mes');
             $table->string('anio');
             $table->timestamps();
